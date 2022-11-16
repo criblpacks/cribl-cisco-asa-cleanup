@@ -52,6 +52,9 @@ Fields extracted are placed at the top level of the event (eg, metadata or index
 
 ## Release Notes
 
+### Version 1.1.6 - 2022-11-15
+    - Added ASA-201009 to parsing file
+
 ### Version 1.1.5 - 2022-10-19
     - Fixed typo is csv lookup file for ASA code 313009 (h/t @olauret)
 

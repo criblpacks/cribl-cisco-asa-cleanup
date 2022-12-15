@@ -4,6 +4,7 @@ groups:
     name: Drop and/or suppress
     description: Pick neither, either, or both. Adjust suppression options as required
     index: 4
+    disabled: true
   JE4Inc:
     name: Extract Fields
     index: 6
@@ -11,15 +12,15 @@ groups:
     disabled: false
   498tsT:
     name: "[Optional] GeoIP Lookup"
-    description: requires download and install of a GeoIP lookup DB (maxmind city level is
-      a popular one)
+    description: requires download and install of a GeoIP lookup DB (maxmind city
+      level is a popular one)
     disabled: true
     index: 7
   sf9vO1:
     name: Output Formatting Options
     description: Pick either Splunk or ECS chained pipelines
     index: 8
-    disabled: false
+    disabled: true
 asyncFuncTimeout: 1000
 functions:
   - id: comment
@@ -66,14 +67,14 @@ functions:
     description: If we can't match any ASA code, add no_matches and stop here
   - id: drop
     filter: C.Lookup('asa_drops.csv').match(asa_code)
-    disabled: false
+    disabled: true
     conf: {}
     final: true
     groupId: IF9Gmi
     description: If the code is present in the asa_drops lookup, we drop the event
   - id: suppress
     filter: C.Lookup('asa_suppress.csv').match(asa_code)
-    disabled: false
+    disabled: true
     conf:
       allow: 1
       suppressPeriodSec: 30
@@ -108,8 +109,8 @@ functions:
           value: "'Cisco'"
         - name: vendor_product
           value: "'Cisco ASA'"
-    description: Trim everything leading up to the ASA code; add a few fields the Splunk TA
-      adds
+    description: Trim everything leading up to the ASA code; add a few fields the
+      Splunk TA adds
   - id: lookup
     filter: "true"
     disabled: false
@@ -157,8 +158,8 @@ functions:
       baseFields: []
       renameExpr: "name.startsWith('groups_') ?
         name.replace('groups_','').replace(/_ALT$/,'').toLowerCase() : name"
-    description: Correct the field names to trim groups_ from the start, and _ALT from the
-      end
+    description: Correct the field names to trim groups_ from the start, and _ALT
+      from the end
     groupId: JE4Inc
   - id: geoip
     filter: src_ip || dest_ip
@@ -213,7 +214,7 @@ functions:
     groupId: 498tsT
   - id: chain
     filter: "true"
-    disabled: false
+    disabled: true
     conf:
       processor: prep_for_splunk
     groupId: sf9vO1

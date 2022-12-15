@@ -53,8 +53,8 @@ functions:
         - src_en
         - dest_en
     groupId: FiV2mI
-    description: List index time fields you want in tstats searches, data models, etc in
-      keep fields below
+    description: List index time fields you want in tstats searches, data models,
+      etc in keep fields below
   - id: comment
     filter: "true"
     disabled: null

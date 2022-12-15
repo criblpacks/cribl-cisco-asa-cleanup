@@ -52,6 +52,10 @@ Fields extracted are placed at the top level of the event (eg, metadata or index
 
 ## Release Notes
 
+### Version 1.1.7 - 2022-12-15
+    - Fixed a typo in the ASA-6-305011 parsing regex
+    - Added ASA-6-305012 parsing regex
+
 ### Version 1.1.6 - 2022-11-15
     - Added ASA-201009 to parsing file
 

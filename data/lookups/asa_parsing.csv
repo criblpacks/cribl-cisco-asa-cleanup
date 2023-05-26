@@ -49,7 +49,7 @@ asa_code,regex
 313001,"313001: (?<action>\w+) (?<transport>\w+) type=(?<icmp_type>\d+), code=(?<icmp_code>\S+) from (?<src_ip>[0-9.]+) on interface (?<src_interface>\S+)"
 313004,"313004: (?<action>\w+) (?<transport>\w+) type=(?<icmp_type>\d+), from (?<src_ip>[0-9.]+) on interface (?<src_interface>\S+) to (?dest_ip>[0-9.]+)"
 313005,"313005:\s*No\s+matching\s+connection\s+for\s+(?<transport>\S+)\s+error\s+message\s*:\s*(?<message>icmp\s+src\s+(?<src_interface>[^:\s]+)\s*:\s*(?:(?<src_ip>(?:[\d+\.]+|[0-9A-Za-f]*:[0-9A-Za-f]*:[0-9A-Za-f:]*))|(?<src_host>[^\s\(]+))(?:\s*\(\s*(?:(?<src_nt_domain>[\S^\\]+)\\)?(?<src_user>[\w\-_]+)\s*\))?\s+dst\s+(?<dest_interface>[^:\s]+)\s*:\s*(?:(?<dest_ip>(?:[\d+\.]+|[0-9A-Za-f]*:[0-9A-Za-f]*:[0-9A-Za-f:]*))|(?<dest_host>[^\s\(]+))\s*\(\s*type\s+(?<icmp_type>\d+)\s*,\s*code\s+(?<icmp_code>\d+)\s*\))\s+on\s+(?<interface_name>\S+)\s+interface\s*\.\s*Original\s+IP\s+payload\s*:\s*(?<orig_transport>\S+)\s+src\s+(?<orig_src_ip>[^\/\s]+)\s*\/\s*(?<src_port>\d{1,5})\s+dst\s+(?<orig_dest_ip>[^\/\s]+)\s*\/\s*(?<dest_port>\d{1,5})"
-313008,"313008: (?<action>\w+) (?<transport>\w+) type=(?<icmp_type>\d+), code=(?<icmp_code>\S+) from (?<src_ip>[0-9.]+) on interface (?<src_interface>\S+)"
+313008,"313008: (?<action>\w+) (?<transport>\S+) type=(?<icmp_type>\d+), code=(?<icmp_code>\S+) from (?<src_ip>\S+) on interface (?<src_interface>\S+)"
 313009,"313009: (?<action>\w+) invalid ICMP code (?<icmp_code>\S+) , for (?<src_interface>\S+):(?<src_ip>[0-9.]+)\/(?<src_port>[0-9]+).* to (?<dest_interface>\S+):(?<dest_ip>[0-9.]+)\/(?<dest_port>[0-9]+).* ICMP type (?<icmp_type>\S+)"
 315011,315011:\s+SSH session from (?<src_ip>\S+) on interface (?<interface_name>.*?) for user (?<user>\S+) disconnected.*reason: .(?<reason>.*). \(
 322001,"322001: (?<action>\w+) MAC address (?<src_mac>\S+), possible spoof attempt on interface (?<src_interface>\S+)"
@@ -94,7 +94,7 @@ asa_code,regex
 505008,505008: *Module +(?<object_id>\S+)\s+(?:(?:in\s+slot\s+)?(?<slot_num>\d+)\s+)?(?<object_category>\S+)\s+is\s+being\s+(?<action>\S+)\s+to\s+(?<new_app_version>\S+)\s*\(\s*currently\s+(?<old_app_version>[^\s\)]+)\s*\)
 505009,505009: *Module +(?<object_id>\S+)\s+(?<object_category>\S+)\s+was\s+(?<vendor_action>\S+)\s+to\s+(?<new_app_version>.+?)[\s\.]*$
 505010,505010: *Module +(?<object_id>\S+)\s+slot\s+(?<slot_num>\S+)\s+(?<action>\w+)
-505011,"505011: *Module +(?<object>[^,\s]+)"
+505011,""505011: *Module +(?<object>[^,\s]+)"
 505012,"505012: *Module +(?<object_id>[^\s,]+)(?:\s+in\s+slot\s+(?<slot_num>\d+))?\s*,\s*application\s+(?<action>\S+)\s+(?<app_name>[^\s,]+)\s*,\s*version\s+(?<app_version>\S+)"
 505013,"505013: *Module +(?<object_id>[^\s,]+)(?:\s+in\s+slot\s+(?<slot_num>\d+))?\s+application\s+(?<action>\S+)\s+from\s*:\s*(?<old_app_name>\S+)\s+version\s+(?<old_app_version>\S+)\s+to\s*:\s*(?<new_app_name>\S+)\s+version\s+(?<new_app_version>.+?)[\s\.]*$"
 505014,"505014: *Module +(?<object_id>[^\s,]+)(?:\s+in\s+slot\s+(?<slot_num>\d+))?\s*,\s*application\s+down\s+(?<app_name>[^\s,]+)\s*,\s*version\s+(?<app_version>\S+)\s+(?<reason>.+)"

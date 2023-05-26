@@ -18,9 +18,9 @@ groups:
     index: 7
   sf9vO1:
     name: Output Formatting Options
-    description: Pick either Splunk or ECS chained pipelines
+    description: Pick either Splunk, OCSF or ECS chained pipelines
     index: 8
-    disabled: true
+    disabled: false
 asyncFuncTimeout: 1000
 functions:
   - id: comment
@@ -215,6 +215,13 @@ functions:
   - id: chain
     filter: "true"
     disabled: true
+    conf:
+      processor: prep_for_ocsf
+    description: Send using OCSF format
+    groupId: sf9vO1
+  - id: chain
+    filter: "true"
+    disabled: false
     conf:
       processor: prep_for_splunk
     groupId: sf9vO1

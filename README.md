@@ -7,6 +7,23 @@ This pack uses lookup files to help drop events, suppress events, and extract fi
 
 * **For Elastic Delivery**: A lookup is used to translate field naming convention from Splunk CIM to Elastic ECS. This lookup is called from the `prep_for_ECS` pipeline, which is optionally chained from the `cisco_asa_cleanup` pipeline.
 
+* **For OCSF Delivery**: This pack has now partially incorporated support for the OCSF event schema. OCSF is a new common schema which is also a requirement for leveraging AWS Security Lake. 
+
+What to expect: Data have mapped across a variety of inputs, in some cases whole data types have been mapped, and in others only certain events. In this pack the following events have been verified to validate against the OCSF 4001 schema:
+- %ASA-1-106103
+- %ASA-2-106017
+- %ASA-3-313008
+- %ASA-4-313009
+- %ASA-6-302015
+- %ASA-6-302016
+- %ASA-6-305012
+- %ASA-6-302014
+- %ASA-6-302013
+- %ASA-6-305011
+- %ASA-4-106023
+
+OCSF functionality is disabled by default. To enable it edit the `cisco_asa_cleanup` pipeline and change the active Chained output option to the OCSF option. Only one of the 3 options should be checked!
+
 
 ## Requirements Section
 
@@ -51,6 +68,10 @@ Fields extracted are placed at the top level of the event (eg, metadata or index
 
 
 ## Release Notes
+
+### Version 1.1.8 - 2023-05-26
+    - Added initial/test OCSF support
+    - Fixed patterns for 313008, 313009, 106023, 305011
 
 ### Version 1.1.7 - 2022-12-15
     - Fixed a typo in the ASA-6-305011 parsing regex

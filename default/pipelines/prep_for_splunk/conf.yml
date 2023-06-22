@@ -24,6 +24,7 @@ functions:
         - "!sourcetype"
         - "!source"
         - "!index"
+        - "!host"
         - "*"
     groupId: FiV2mI
   - id: eval
@@ -82,5 +83,6 @@ functions:
         - src_en
         - dest_en
         - suppressCount
+        - host
       remove:
         - "*"

@@ -69,6 +69,10 @@ Fields extracted are placed at the top level of the event (eg, metadata or index
 
 ## Release Notes
 
+### Version 1.1.9 - 2023-06-22
+    - host was mistakenly left out of the Splunk delivery pipeline
+    - Sample filename was wrong
+
 ### Version 1.1.8 - 2023-05-26
     - Added initial/test OCSF support
     - Fixed patterns for 313008, 313009, 106023, 305011

@@ -69,6 +69,11 @@ Fields extracted are placed at the top level of the event (eg, metadata or index
 
 ## Release Notes
 
+### Version 1.1.10 - 2023-09-29
+    - Added 430002 (thanks @Walter in Cribl Slack!)
+    - Fixed 106015 to be more permissive of optional interface field
+    - Fixed 305011 which had bad regex, missing a closing `>`
+
 ### Version 1.1.9 - 2023-06-22
     - host was mistakenly left out of the Splunk delivery pipeline
     - Sample filename was wrong

@@ -137,29 +137,21 @@ functions:
           value: _raw.match(__regex).groups
         - name: _no_matches
           value: groups == undefined
+        - disabled: false
+          value: Object.assign(__e,groups)
+          name: ""
+      remove:
+        - groups
     groupId: JE4Inc
     description: Use resulting regex to extract fields, and clean up some
-  - id: flatten
-    filter: "! _no_matches"
-    disabled: false
-    conf:
-      fields:
-        - groups
-      prefix: ""
-      depth: 5
-      delimiter: _
-    groupId: JE4Inc
-    description: flatten the matching groups
   - id: rename
-    filter: "! _no_matches"
+    filter: "!_no_matches"
     disabled: false
     conf:
       wildcardDepth: 5
       baseFields: []
-      renameExpr: "name.startsWith('groups_') ?
-        name.replace('groups_','').replace(/_ALT$/,'').toLowerCase() : name"
-    description: Correct the field names to trim groups_ from the start, and _ALT
-      from the end
+      renameExpr: "name.endsWith('_ALT') ? name.replace(/_ALT$/,'').toLowerCase() : name"
+    description: Correct the fields with _ALT on the end
     groupId: JE4Inc
   - id: geoip
     filter: src_ip || dest_ip

@@ -36,7 +36,7 @@ Before you activate the Pack on live data:
     * The field `_no_matches` will be added to each event with a regex defined
         * If no matches are found, it will be `true` meaning the regex failed
     * If a regex uses the same named group twice (eg, `(?<group>foo)|(?<group>bar)`) you'll need to name the second with _ALT. Eg: `group_ALT`. This will be undone after extraction automatically.
-    * There are 179 codes included by default based on previous experience. YMMV.
+    * There are 150+ codes included by default based on previous experience. YMMV.
     * We attempted to maintain compliance with the Splunk CIM in naming fields
 * The **asa_suppress.csv** file contains ASA codes that should only be allowed 1 event per 30 seconds per worker process
     * There are 2 codes included by default based on previous experience. YMMV.
@@ -45,20 +45,26 @@ Before you activate the Pack on live data:
     * This lookup is used in the **prep_for_ECS** pipeline
     * The `prep_for_ECS` pipeline will create nested objects for names with periods in them
 
-You're encouraged to add to the included CSVs and submit a pull request!
+You're encouraged to add to the included CSVs and submit a pull request.
+
+## Special Cases and Exceptions
+
+There is a group for handling events that require special attention. These rules fall outside of what can be handled in the parsing CSV lookup file. This is includes some events that require flipping src and dest fields.
 
 ## Extracted fields
 
-Fields extracted are placed at the top level of the event (eg, metadata or index time field). You can choose either to:
-    * Reserialize them, replacing _raw with a JSON payload of selected events
-    * Leave _raw alone and keep some fields (as index time data)
-    * Use the `prep_for_ECS` pipeline to translate them to ECS naming conventions and format
+Fields extracted are placed at the top level of the event (eg, metadata or index time field). You can choose to:
+* Reserialize them, replacing _raw with a JSON payload of selected events
+* Leave _raw alone and keep some fields (as index time data)
+* Use the `prep_for_ECS` pipeline to translate them to ECS naming conventions and format
+
+**If you do not require field extractions** consider adding the Final Flag to the Eval rule marked as such. You'll get the benefit of volume reduction, and the option to drop unneeded events based on the drops CSV, but you'll save resources of running extractions that go unused.
 
 ## Using The Pack
 
 1. Install (Packs -> Add New -> Add from Dispensary)
 2. Inspect the optional pipeline rules and select accordingly
-    - In particular, **if you're sending to Elastic** you'll want to disable rule 17 and activate rule 18 (in the `cisco_asa_cleanup` pipeline)
+    - In particular, mind the output options at the end of the pipeline
 3. Download and install a GeoIP db if GeoIP enhancement is desired (see [maxmind.com](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data?lang=en))
 4. Modify the lookup files as required for your needs (provided entries may or may not meet your needs)
     * We recommend you download the lookup files to your local system and manage versioning there. Re-upload the files when modified.
@@ -69,6 +75,19 @@ Fields extracted are placed at the top level of the event (eg, metadata or index
 
 ## Release Notes
 
+### Version 1.1.13 - 2023-12-13
+    - Grouped the dest/src flip together with other Exceptions
+    - Added exception for 430001-5 events which have variable formatting in "Key: Value" pairs
+        - Shout out to Slack user @Brenden
+
+### Version 1.1.12 - 2023-11-29
+    - For codes 302013, 302015, 302020, 302021, 602303, 602304, and 702307 we now reverse src and dest fields if the direction is outbound
+    - See the Flip dest/src fields group
+        - Shout out to Slack user @Brenden for identifying the mistake
+
+### Version 1.1.11 - 2023-11-01
+    - Fixed 419002: Cisco's docs don't match logs found in the wild, updated regex to work with both
+    
 ### Version 1.1.10 - 2023-09-29
     - Added 430002 (thanks @Walter in Cribl Slack!)
     - Fixed 106015 to be more permissive of optional interface field

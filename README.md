@@ -75,6 +75,9 @@ Fields extracted are placed at the top level of the event (eg, metadata or index
 
 ## Release Notes
 
+### Version 1.1.14 - 2024-02-01
+    - Added 302020 and 302021 (Thanks @Paul Stout)
+    
 ### Version 1.1.13 - 2023-12-13
     - Grouped the dest/src flip together with other Exceptions
     - Added exception for 430001-5 events which have variable formatting in "Key: Value" pairs

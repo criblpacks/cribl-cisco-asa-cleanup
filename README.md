@@ -75,6 +75,9 @@ Fields extracted are placed at the top level of the event (eg, metadata or index
 
 ## Release Notes
 
+### Version 1.1.15 - 2024-06-10
+    - Repaired bad regex for 106021, 106022 and 313004
+    
 ### Version 1.1.14 - 2024-02-01
     - Added 302020 and 302021 (Thanks @Paul Stout)
     
